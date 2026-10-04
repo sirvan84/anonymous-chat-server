@@ -1,0 +1,12 @@
+{
+  "name": "anonymous-chat-server",
+  "version": "1.0.0",
+  "description": "Anonymous temporary chat server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
