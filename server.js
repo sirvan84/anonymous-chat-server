@@ -42,6 +42,14 @@ function sendToAll(data) {
     }
 }
 
+function sendUserCount() {
+
+    sendToAll({
+        type: "users_count",
+        count: users.size
+    });
+}
+
 function sendToUser(user, data) {
 
     if (
@@ -68,6 +76,7 @@ function removeUser(user) {
         type: "system",
         message: "کاربر " + user.number + " از چت خارج شد"
     });
+    sendUserCount();
 }
 
 wss.on("connection", (socket) => {
@@ -93,9 +102,11 @@ wss.on("connection", (socket) => {
 
     // اطلاع ورود به همه
     sendToAll({
-        type: "system",
-        message: "خوش آمدید کاربر " + user.number
-    });
+    type: "system",
+    message: "خوش آمدید کاربر " + user.number
+});
+
+sendUserCount();
 
     socket.on("message", (rawMessage) => {
 
