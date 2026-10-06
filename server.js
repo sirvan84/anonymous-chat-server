@@ -171,6 +171,33 @@ wss.on("connection", (socket) => {
 
             return;
         }
+        
+// =========================
+// دریافت لیست کاربران برای مدیر
+// =========================
+
+if (data.type === "get_users") {
+
+    if (!user.isAdmin) {
+        return;
+    }
+
+    const onlineUsers = [];
+
+    for (const currentUser of users.values()) {
+
+        onlineUsers.push({
+            number: currentUser.number
+        });
+    }
+
+    sendToUser(user, {
+        type: "users_list",
+        users: onlineUsers
+    });
+
+    return;
+}
 
         // =========================
         // پیام خصوصی مدیر
